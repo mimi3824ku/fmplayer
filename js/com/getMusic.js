@@ -147,7 +147,7 @@ Music.prototype = {
         song_item.bgPic = _this.$background.attr('data-bgPic');
         song_item.sid = _this.$audio.attr('sid');
 
-        if(_this.firstLoad===true&&_this.starList===null){
+        if(_this.firstLoad===true&&_this.starList===null){//首屏加载因为先读取localStorage，需重新创建_this.starList
             _this.starList = [];
             _this.firstLoad = false;
         }

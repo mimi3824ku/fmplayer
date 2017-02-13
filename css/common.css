@@ -1,0 +1,453 @@
+html{color:#000;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}html,body{font-family:sans-serif}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,menu,nav,section{margin:0;padding:0}input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:500}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a:hover{text-decoration:underline}ins,a{text-decoration:none}
+
+html,body{
+    height: 100%;
+    font-size: 62.5%;
+}
+
+.mask{
+    background-color: #D2D5D6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -9999999;
+}
+
+.clearfix:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.music-ball.icon-musicBall{
+    font-size: 4rem;
+    cursor: pointer;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+}
+
+.musicPlayer-wrapper{
+    text-align: center;
+    height: 100%;
+    display: none;
+}
+
+.musicPlayer-wrapper:before{
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.musicPlayer-wrapper:after{
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.musicPlayer{
+    width: 380px;
+    height: 480px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #EEF1F2;
+    border-radius: 8px;
+    box-shadow: 0 0 10px 2px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 99999999999999;
+}
+
+.musicPlayer .star-list{
+    display: block;
+    position: absolute;
+    width: 300px;
+    height: 280px;
+    background: linear-gradient(to bottom, rgba(245,255,112,1) 7%,rgba(245,255,112,1) 37%,rgba(255,231,99,1) 100%);
+    border-radius: 5px;
+    top: 160px;
+    left: 390px;
+    padding: 20px;
+    overflow: auto;
+    transition: all 1s;
+}
+
+.musicPlayer .star-list.scaleList{
+    width: 40px;
+    height: 36px;
+    overflow: visible;
+    padding: 0;
+}
+
+.musicPlayer .star-list .scaleBtn>span{
+    display: block;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+    color: slategray;
+    font-size: 2rem;
+}
+
+@keyframes hover {
+    0% {transform-origin: center;transform: rotate(0deg);}
+    50% {transform-origin: center;transform: rotate(360deg);}
+    100% {transform-origin: center;transform: rotate(0deg);}
+}
+
+.musicPlayer .star-list .scaleBtn>span:hover{
+    animation: hover .8s;
+    animation-iteration-count: infinite;
+}
+
+.musicPlayer .star-list .scaleBtn>span.scaleBtn{
+    right: 9px;
+    top: 9px;
+}
+
+.musicPlayer .star-list .scaleBtn>span:hover{
+
+}
+
+.musicPlayer .star-list .scaleBtn>span.enlargeBtn{
+    display: none;
+}
+
+.musicPlayer .star-list>h1{
+    width: 160px;
+    font-family: arial,'sans-serif';
+    font-size: 2rem;
+    border-bottom: 2px solid lightcoral;
+    margin: 0 auto;
+}
+
+.musicPlayer .star-list>ol{
+    list-style: decimal;
+    padding: 0 20px;
+}
+
+.musicPlayer .star-list>ol>li{
+    font-size: 1.5rem;
+    font-family: "Microsoft YaHei";
+    margin: 10px 0;
+/*    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;*/
+    cursor: pointer;
+}
+
+.musicPlayer .star-list>ol>li:hover{
+    opacity: 0.6;
+}
+
+.musicPlayer .star-list>ol>li:nth-of-type(even){
+    color: #795da3;
+}
+
+.musicPlayer .star-list>ol>li:nth-of-type(odd){
+    color: skyblue;
+}
+
+/*=======歌曲图片歌词样式========*/
+
+.musicPlayer .cover{
+    position: relative;
+    height: 240px;
+    width: 100%;
+    padding: 20px 0;
+    border-radius: 8px 8px 0 0;
+    background-size: cover;
+    background-color: rgba(100, 100, 100, 0.5)
+}
+
+.musicPlayer .cover .lyric-panel{
+    height: 240px;
+    overflow: hidden;
+    display: none;
+}
+
+.musicPlayer .cover .lyric-panel .lyric{
+    position: relative;
+    transition: all 1s;
+}
+
+.musicPlayer .cover .lyric-panel .lyric li{
+    padding: 5px 0 2px 0;
+    position: relative;
+    text-align: center;
+    color: #F1F1F1;
+    font-size: 12px ;
+    transition: all .6s;
+}
+
+.musicPlayer .cover .lyric-panel .lyric li.active {
+    font-size: 13px;
+    font: bolder 14px arial;
+    text-decoration: underline;
+}
+
+.musicPlayer .cover .lyric-panel .lyric li.pink{
+    color: lightcoral;
+}
+
+.musicPlayer .cover .lyric-panel .lyric li.blue{
+    color: deepskyblue;
+}
+
+.musicPlayer .cover .lyric-panel .lyric li.green{
+    color: lawngreen;
+}
+
+.musicPlayer .cover .colorBtn>span{
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 10px;
+    z-index: 99999;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all .3s;
+}
+
+.musicPlayer .cover .colorBtn>span:hover{
+    opacity: 1;
+}
+
+.musicPlayer .cover .colorBtn>span.deep{
+    opacity: 1;
+}
+
+.musicPlayer .cover .colorBtn>span.pink{
+    background-color: lightpink;
+    right: 54px;
+}
+
+.musicPlayer .cover .colorBtn>span.blue{
+    background-color: lightblue;
+    right: 36px;
+}
+
+.musicPlayer .cover .colorBtn>span.green{
+    background-color: lightgreen;
+    right: 18px;
+}
+/*===============歌曲信息及功能样式===================*/
+
+.musicPlayer .info-and-feature{
+    padding: 20px 30px;
+}
+
+.musicPlayer .info-and-feature .info{
+    width: 130px;
+    height: 50px;
+    float: left;
+    text-align: left;
+}
+
+.musicPlayer .info-and-feature .info .songName{
+    color: rgba(0,0,0,0.9);
+    font: 1.6rem/1.5 "Microsoft YaHei",arial,sans-serif;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.musicPlayer .info-and-feature .info .singer{
+    color: rgba(0,0,0,0.5);
+    font: italic 1.2rem/1.5 "Microsoft YaHei",arial,sans-serif;
+    text-decoration: underline;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.musicPlayer .info-and-feature .info .songStyle{
+    color: rgba(0,0,0,0.8);
+    font: bolder 1rem/2 "Microsoft YaHei",arial,sans-serif;
+}
+
+.musicPlayer .info-and-feature .feature{
+    width: 100px;
+    height: 30px;
+    float: right;
+    line-height: 30px;
+}
+
+.musicPlayer .info-and-feature .feature .icon-feature{
+    font-size: 2.3rem;
+    color: #D2D5D6;
+    cursor: pointer;
+}
+
+.musicPlayer .info-and-feature .feature a{
+    text-decoration: none;
+}
+
+.musicPlayer .info-and-feature .feature .m-transmit:hover{
+    color: #333333;
+}
+
+.musicPlayer .info-and-feature .feature .m-star.star{
+    color: #feec98
+}
+
+.musicPlayer .info-and-feature .feature .icon-download:hover{
+    color: #fe8698
+}
+
+.musicPlayer .info-and-feature .feature .icon-feature:last-of-type{
+    padding: 0 3px;
+    font-size: 2rem;
+}
+
+/*==========歌曲控制按钮及进度条样式=========*/
+.musicPlayer .control .progress{
+    text-align: right;
+}
+
+.musicPlayer .control .progress .time{
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+    padding-right: 40px;
+    color: #333;
+}
+
+.musicPlayer .control .progress .basebar{
+    display: block;
+    border: none;
+    width: 300px;
+    height: 4px;
+    margin: 5px auto 10px auto;
+    border-radius: 2px;
+    background-color: #414141;
+    cursor: pointer;
+}
+
+.musicPlayer .control .progress .basebar .progress-pathway{
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.musicPlayer .control .progress .basebar .progress-bar{
+    display: block;
+    width: 0%;
+    height: 100%;
+    background-color: silver;
+}
+
+.musicPlayer .control .progress .basebar .dragBall{
+    content: '';
+    display: block;
+    width: 9px;
+    height: 9px;
+    box-shadow: 0 0 3px 1px silver;
+    border-radius: 50%;
+    position: absolute;
+    top: -3px;
+    left: -1%;
+    background-color: silver;
+    cursor: pointer;
+}
+
+.musicPlayer .control .play-ctrl-btn{
+    width: 50%;
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+    float: left;
+    left: 10px;
+}
+
+.musicPlayer .control .play-ctrl-btn .icon-play{
+    color: #414141;
+}
+
+.musicPlayer .control .play-ctrl-btn .m-play,
+.musicPlayer .control .play-ctrl-btn .m-pause{
+    font-size: 3.5rem;
+    position: absolute;
+    left: 20px;
+    cursor: pointer;
+}
+
+.musicPlayer .control .play-ctrl-btn .m-pause{
+    display: none;
+}
+
+.musicPlayer .control .play-ctrl-btn .m-next{
+    font-size: 2.4rem;
+    position: absolute;
+    left: 60px;
+    top: 2px;
+    cursor: pointer;
+}
+
+.musicPlayer .control .play-ctrl-btn .m-channels{
+    font-size: 2.4rem;
+    position: absolute;
+    left: 90px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.musicPlayer .control .music-ctrl-btn{
+    height: 50px;
+    width: 50%;
+    line-height: 50px;
+    float: right;
+    position: relative;
+    color: #D2D5D6;
+}
+
+.musicPlayer .control .music-ctrl-btn .icon-music{
+    position: absolute;
+    cursor: pointer;
+    top: 5px;
+    transition: all .6s;
+}
+
+.musicPlayer .control .music-ctrl-btn .m-repeat{
+    font-size: 1.4rem;
+    right: 70px;
+    top: 5px;
+}
+.musicPlayer .control .music-ctrl-btn .m-repeat.recycleed{color: #414141}
+.musicPlayer .control .music-ctrl-btn .m-lyric{
+    font-size: 1.6rem;
+    right: 40px;
+}
+
+.musicPlayer .control .music-ctrl-btn .m-repeat:hover {
+    font-size: 1.3rem;
+    color: #414141;
+}
+
+.musicPlayer .control .music-ctrl-btn .m-lyric:hover{
+    font-size: 1.5rem;
+    color: #414141;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -23,6 +23,7 @@ function Music(){
     this.$star.attr('data-star','false');
     this.starList = [];
     this.$starList = $('#starList');
+    this.firstLoad = true;
 
     this.bindEvents();
     this.loadLocalStorage();
@@ -81,7 +82,7 @@ Music.prototype = {
                 _this.$star.attr('data-star','true');
             }
             $(this).toggleClass('star');
-
+            console.log('star');
             _this.createSongItem();
 
         });
@@ -146,9 +147,14 @@ Music.prototype = {
         song_item.bgPic = _this.$background.attr('data-bgPic');
         song_item.sid = _this.$audio.attr('sid');
 
+        if(_this.firstLoad===true&&_this.starList===null){
+            _this.starList = [];
+            _this.firstLoad = false;
+        }
         if(_this.starList!=null){
             Array.prototype.push.call(_this.starList,song_item);
         }
+        console.log('starList',_this.starList)
 
         if(_this.$star.attr('data-star') === 'true'){
             _this.render_list(_this.starList);
@@ -302,6 +308,8 @@ Music.prototype = {
     },
     /*‰÷»æstar∏Ëµ•*/
     render_list: function(starList){
+        console.log('starList',starList)
+
         var songLi = '';
         var _this = this;
         if(starList!=null){
@@ -323,7 +331,6 @@ Music.prototype = {
         }
             _this.$starList.empty();
             _this.$starList.append(songLi);
-
     },
     /*‰÷»æ∏Ë«˙–≈œ¢µΩ√Ê∞Â*/
     renderSongInfo: function(sid,songName,bgPic,singer,songSrc,songStyle){
